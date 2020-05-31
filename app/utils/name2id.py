@@ -21,3 +21,7 @@ def name2id(name):
     if not NAME2ID:
         gen_name2id()
     return NAME2ID[name] if name in NAME2ID else 1000
+
+
+def id2name(c_id):
+    return _PriconneData.CHARA[c_id][0]

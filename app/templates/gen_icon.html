@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <h1>角色图标生成器</h1>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+        <img src="{{ url_for('static', filename='icons/'+img) }}">
+        <h2>
+            {% if name %}
+                {{ name }}
+            {% endif %}
+        </h2>
+    </div>
+    <div class="col-md-4">
+        {{ wtf.quick_form(form)}}
+    </div>
+    <div class="col-md-2"></div>
+</div>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <h3>创建历史</h3>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <ol>
+            {% for item, time in history %}
+            <li>
+                <div class="col-md-6">{{ item }}</div>
+                <div class="col-md-6">{{ time }}</div>
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+{% endblock %}
