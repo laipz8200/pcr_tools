@@ -30,6 +30,7 @@ def gen_icon(img_name=None):
 
         c_id = name2id(name)
         realname = id2name(int(c_id))
+
         if not os.path.exists(f'app/static/icons/{star}X_R{rank}_{c_id}{"E" if equip else ""}.png'):
             try:
                 img = genicon(name, star, rank, equip)
