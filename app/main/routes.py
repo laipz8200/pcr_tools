@@ -20,10 +20,10 @@ def index(img_name=None):
 
         c_id = name2id(name)
         print(name, star,rank, equip, c_id)
-        if not os.path.exists(f'app/static/{star}X_R{rank}_{c_id}{"E" if equip else ""}.png'):
+        if not os.path.exists(f'app/static/icons/{star}X_R{rank}_{c_id}{"E" if equip else ""}.png'):
             try:
                 img = genicon(name, star, rank, equip)
-                img.save(f'app/static/{star}X_R{rank}_{c_id}{"E" if equip else ""}.png', 'PNG')
+                img.save(f'app/static/icons/{star}X_R{rank}_{c_id}{"E" if equip else ""}.png', 'PNG')
                 img_name = f'{star}X_R{rank}_{c_id}{"E" if equip else ""}'
             except FileNotFoundError:
                 img_name = 'unknow'
