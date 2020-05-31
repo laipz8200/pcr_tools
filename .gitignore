@@ -1,0 +1,9 @@
+.flaskenv
+.DS_Store
+.vscode/
+
+__pycache__/
+venv/
+
+app/static/
+res/

@@ -1,0 +1,8 @@
+environ==1.0
+Flask==1.1.2
+Flask-Bootstrap==3.3.7.1
+Flask-WTF==0.14.3
+numpy==1.18.4
+Pillow==7.1.2
+python-dotenv==0.13.0
+gunicorn==20.0.4

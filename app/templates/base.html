@@ -1,0 +1,26 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block head %}
+{{ super() }}
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+{% endblock %}
+
+{% block title %}
+    {% if title %}{{ title }} - PCR资源站{% endif %}
+{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/" class="navbar-brand">PCR资源站</a>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% block app_content %}{% endblock %}
+</div>
+{% endblock %}
