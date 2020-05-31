@@ -19,6 +19,7 @@ def index(img_name=None):
         equip = form.equip.data
 
         c_id = name2id(name)
+        print(name, star,rank, equip, c_id)
         if not os.path.exists(f'app/static/{star}X_R{rank}_{c_id}{"E" if equip else ""}.png'):
             try:
                 img = genicon(name, star, rank, equip)
@@ -26,6 +27,8 @@ def index(img_name=None):
                 img_name = f'{star}X_R{rank}_{c_id}{"E" if equip else ""}'
             except FileNotFoundError:
                 img_name = 'unknow'
+        else:
+            img_name = f'{star}X_R{rank}_{c_id}{"E" if equip else ""}'
         return redirect(url_for('main.index', img_name=img_name))
     return render_template(
         'form.html',
