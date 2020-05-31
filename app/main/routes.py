@@ -9,9 +9,6 @@ from app.utils.genicon import genicon
 from app.utils.name2id import name2id, id2name
 
 
-gen_history = deque(maxlen=20)
-
-
 @bp.route('/', methods=['GET', 'POST'])
 @bp.route('/<img_name>', methods=['GET', 'POST'])
 def gen_icon(img_name=None):
@@ -40,7 +37,6 @@ def gen_icon(img_name=None):
                 img_name = 'unknow'
         else:
             img_name = f'{star}X_R{rank}_{c_id}{"E" if equip else ""}'
-        gen_history.append((f'{star}星R{rank}{"专武" if equip else ""}{realname}', datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
         return redirect(url_for('main.gen_icon', img_name=img_name))
     return render_template(
         'gen_icon.html',
@@ -48,5 +44,4 @@ def gen_icon(img_name=None):
         form=form,
         img=img_name+'.png',
         name=realname,
-        history=list(gen_history)[::-1]
     )
