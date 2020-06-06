@@ -3,7 +3,10 @@ import numpy as np
 from PIL import Image, ImageFont, ImageDraw
 
 
-def compose(character_id: int, star_nu: int=1, has_equip: bool=False, rank: int=0):
+def create_icon(character_id: int, star_nu: int=1, has_equip: bool=False, rank: int=0):
+    """
+    合成角色图标
+    """
     # Star坐标集
     coordinates_star = [(3, 105), (23, 105), (43, 105), (63, 105), (83, 105), (103, 105)]
 
@@ -56,3 +59,7 @@ def compose(character_id: int, star_nu: int=1, has_equip: bool=False, rank: int=
         character.alpha_composite(equip, coordinates_equip)
     
     return character
+
+
+def create_team():
+    pass

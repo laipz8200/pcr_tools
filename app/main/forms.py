@@ -12,6 +12,6 @@ class IconForm(FlaskForm):
         default=(1, '1⭑'),
         coerce=int
     )
-    rank = IntegerField('Rank', validators=[NumberRange(0, 17, 'rank必须为1-17之间的整数, 填0不显示rank')])
+    rank = IntegerField('Rank', validators=[NumberRange(0, 17, 'rank必须为1-17之间的整数, 填0不显示rank')], default=0)
     equip = BooleanField('专武')
     submit = SubmitField('生成')

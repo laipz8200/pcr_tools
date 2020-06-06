@@ -1,7 +1,7 @@
 import os
 from PIL import Image
 from app.utils.name2id import name2id
-from app.utils.compose import compose
+from app.utils.compose import create_icon
 
 
 def genicon(name: str, star: int, rank: int=0, has_equip :bool=False):
@@ -10,7 +10,7 @@ def genicon(name: str, star: int, rank: int=0, has_equip :bool=False):
         raise FileNotFoundError
     else:
         try:
-            img = compose(c_id, star, has_equip, rank)
+            img = create_icon(c_id, star, has_equip, rank)
         except Exception:
             raise
     return img
