@@ -7,3 +7,7 @@ venv/
 
 app/static/
 res/
+
+pcr_tools.db
+
+migrations/
