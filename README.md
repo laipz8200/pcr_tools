@@ -7,6 +7,8 @@ some useful tools for プリコネR
 
 ```
 flask db init
+flask db migrate -m "init"
+flask db upgrade
 ```
 
 ## Update
@@ -15,6 +17,7 @@ flask db init
 
 - 添加数据库支持，对未知角色统一处理
 - 图片传输方式修改为base64
+- 更新到Bootstrap4
 
 2020/6/5
 

@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% import 'bootstrap/form.html' as wtf %}
+
+{% block content %}
+<div class="row justify-content-md-center mt-3">
+    <div class="col-md-8">
+        <h1>{{ title }}</h1>
+    </div>
+</div>
+<hr>
+<div class="row justify-content-md-center">
+    <div class="col-auto">
+        {% if team_pic %}
+        <img src="data:image/png;base64, {{ team_pic }}">
+        {% endif %}
+    </div>
+</div>
+<div class="row justify-content-md-center">
+    <div class="col-md-8">
+        {{ wtf.render_form(form, form_type='horizontal', horizontal_columns=('md', 2, 10), button_size='block') }}
+    </div>
+</div>
+{% endblock %}

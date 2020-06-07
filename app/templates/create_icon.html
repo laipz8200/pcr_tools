@@ -1,32 +1,31 @@
-{% extends "base.html" %}
-{% import 'bootstrap/wtf.html' as wtf %}
+{% extends "layout.html" %}
+{% import 'bootstrap/form.html' as wtf %}
 
-{% block app_content %}
-<div class="row">
-    <div class="col-md-2"></div>
+{% block content %}
+<div class="row justify-content-md-center mt-3">
     <div class="col-md-8">
-        <h1>角色图标生成器</h1>
+        <h1>{{ title }}</h1>
     </div>
-    <div class="col-md-2"></div>
 </div>
 <hr>
-<div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-4">
+<div class="row justify-content-md-center align-items-end">
+    <div class="col-auto">
         {% if icon %}
         <img src="data:image/png;base64, {{ icon }}">
         {% else %}
         <img src="{{ url_for('static', filename='icons/unknow.png') }}">
         {% endif %}
-        <h2>
-            {% if name %}
-                {{ name }}
-            {% endif %}
-        </h2>
     </div>
-    <div class="col-md-4">
-        {{ wtf.quick_form(form)}}
+    <div class="col-auto">
+        {% if name %}
+            {{ name }}
+        {% endif %}
     </div>
-    <div class="col-md-2"></div>
+</div>
+<hr>
+<div class="row justify-content-md-center">
+    <div class="col-md-8">
+        {{ wtf.render_form(form, button_size='block', form_type='horizontal', horizontal_columns=('md', 2, 10)) }}
+    </div>
 </div>
 {% endblock %}
