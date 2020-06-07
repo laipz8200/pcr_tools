@@ -13,12 +13,12 @@
         {% if icon %}
         <img src="data:image/png;base64, {{ icon }}">
         {% else %}
-        <img src="{{ url_for('static', filename='icons/unknow.png') }}">
+        <img src="{{ url_for('static', filename='unknow.png') }}">
         {% endif %}
     </div>
     <div class="col-auto">
         {% if name %}
-            {{ name }}
+        {{ name }}
         {% endif %}
     </div>
 </div>

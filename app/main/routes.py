@@ -9,6 +9,10 @@ from app.utils.name2id import id2name, name2id
 
 
 @bp.route('/', methods=['GET', 'POST'])
+def index():
+    return redirect(url_for('main.create_icon'))
+
+
 @bp.route('/create_icon/', methods=['GET', 'POST'])
 @bp.route('/create_icon/<icon_id>', methods=['GET', 'POST'])
 def create_icon(icon_id=None):
@@ -48,8 +52,11 @@ def create_icon(icon_id=None):
 
 @bp.route('/create_team/', methods=['GET', 'POST'])
 def create_team():
+    return 'building...'
     form = TeamForm()
     team_pic = None
+    if form.is_submitted():
+        return redirect(url_for('main.create_team'))
     return render_template(
         'create_team.html',
         title='队伍编成',

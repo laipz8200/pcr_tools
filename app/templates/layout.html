@@ -2,30 +2,56 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        {% block styles %}
-            {{ bootstrap.load_css() }}
-        {% endblock %}
-        <title>{% if title %}{{ title }} - PCR资源站{% endif %}</title>
-    </head>
-    <body>
-        <nav class="navbar navbar-light bg-light navbar-expand-lg">
-            <a href="#" class="navbar-brand">PCR资源站</a>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% block styles %}
+    {{ bootstrap.load_css() }}
+    {% endblock %}
+    <title>{% if title %}{{ title }} - PCR资源站{% endif %}</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='icon/favicon.ico') }}" type="image/x-icon">
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-light navbar-expand-lg">
+        <a href="#" class="navbar-brand">
+            <img src="{{ url_for('static', filename='favicon.ico') }}" width="30" height="30"
+                class="d-inline-block align-top" alt="" loading="lazy">
+            PCR资源站
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="navbar-nav mr-auto">
                 {{ render_nav_item('main.create_icon', '图标制作') }}
                 {{ render_nav_item('main.create_team', '队伍编成') }}
             </div>
-        </nav>
 
-        <div class="container">
-            {% block content %} {% endblock %}
+            <a href="https://github.com/laipz8200/pcr_tools" target="_blank" class="navbar-brand">
+                Github
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-github">
+                    <path
+                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                    </path>
+                </svg>
+            </a>
         </div>
+    </nav>
 
-        {% block scripts %}
-            {{ bootstrap.load_js() }}
-        {% endblock %}
-    </body>
+    <div class="container">
+        {% block content %} {% endblock %}
+    </div>
+
+    {% block scripts %}
+    {{ bootstrap.load_js() }}
+    {% endblock %}
+</body>
+
 </html>
