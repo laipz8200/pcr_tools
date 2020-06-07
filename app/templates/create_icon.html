@@ -13,7 +13,11 @@
 <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-4">
-        <img src="{{ url_for('static', filename='icons/'+img) }}">
+        {% if icon %}
+        <img src="data:image/png;base64, {{ icon }}">
+        {% else %}
+        <img src="{{ url_for('static', filename='icons/unknow.png') }}">
+        {% endif %}
         <h2>
             {% if name %}
                 {{ name }}

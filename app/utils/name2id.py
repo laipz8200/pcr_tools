@@ -1,6 +1,5 @@
 from app.utils.priconne_data import _PriconneData
 
-
 NAME2ID = {}
 
 def gen_name2id():

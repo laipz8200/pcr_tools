@@ -1,46 +1,49 @@
-import re
-import os
-from datetime import datetime
-from flask import render_template, request, url_for, redirect, send_from_directory
+from flask import redirect, render_template, url_for
+import hashlib
+
 from app.main import bp
 from app.main.forms import IconForm
-from app.utils.genicon import genicon
-from app.utils.name2id import name2id, id2name
+from app.models import Icon
+from app.utils import processer, structure
+from app.utils.name2id import id2name, name2id
 
 
 @bp.route('/', methods=['GET', 'POST'])
-@bp.route('/<img_name>', methods=['GET', 'POST'])
-def gen_icon(img_name=None):
-    if not img_name or img_name == 'unknow':
-        img_name = 'unknow'
-        c_id = 1000
-    else:
-        c_id = re.match(r'^.*?([0-9]{4})E?$', img_name).group(1)
-    realname = id2name(int(c_id))
+@bp.route('/create_icon/<icon_id>', methods=['GET', 'POST'])
+def create_icon(icon_id=None):
     form = IconForm()
+    """
+    这里根据 icon_id 从 db 获取 base64 值和 name
+    :icon_id: md5 for icon
+    :name: character's name
+    """
+    if icon_id is not None:
+        icon = Icon.query.filter_by(icon_id=icon_id).first()
+        if icon:
+            icon_data = icon.base64.decode('utf-8')
+            name = icon.name
+    else:
+        icon_data = None
+        name = None
+
     if form.validate_on_submit():
-        name = form.name.data
-        star = form.star.data
-        rank = form.rank.data
-        equip = form.equip.data
+        c_id = name2id(form.name.data)
+        c_name = id2name(c_id)
 
-        c_id = name2id(name)
-        realname = id2name(int(c_id))
+        character = structure.Character(name=c_name, id=c_id, stars=form.stars.data,
+                              ranks=form.ranks.data, has_equip=form.has_equip.data)
+        sequence = f"{character.id}{character.stars}{character.ranks}" + ('E' if character.has_equip else '')
+        icon_id = hashlib.md5(sequence.encode('utf-8')).hexdigest()
 
-        if not os.path.exists(f'app/static/icons/{star}X_R{rank}_{c_id}{"E" if equip else ""}.png'):
-            try:
-                img = genicon(name, star, rank, equip)
-                img.save(f'app/static/icons/{star}X_R{rank}_{c_id}{"E" if equip else ""}.png', 'PNG')
-                img_name = f'{star}X_R{rank}_{c_id}{"E" if equip else ""}'
-            except FileNotFoundError:
-                img_name = 'unknow'
-        else:
-            img_name = f'{star}X_R{rank}_{c_id}{"E" if equip else ""}'
-        return redirect(url_for('main.gen_icon', img_name=img_name))
+        icon = Icon.query.filter_by(icon_id=icon_id).first()
+        if icon is None:
+            icon_id = processer.create_icon(character)
+
+        return redirect(url_for('main.create_icon', icon_id=icon_id))
     return render_template(
-        'gen_icon.html',
+        'create_icon.html',
         title='角色图标生成',
         form=form,
-        img=img_name+'.png',
-        name=realname,
+        icon=icon_data,
+        name=name,
     )

@@ -1,7 +1,9 @@
 from flask import Flask
-from config import Config
-from app.extensions import bootstrap
+
+from app.extensions import bootstrap, db, migrate
 from app.main import bp as main_bp
+from config import Config
+
 
 def create_app(config_class=Config):
     app = Flask(__name__)
@@ -15,6 +17,8 @@ def create_app(config_class=Config):
 
 def register_extensions(app):
     bootstrap.init_app(app)
+    db.init_app(app)
+    migrate.init_app(app, db)
 
 
 def register_blueprints(app):
