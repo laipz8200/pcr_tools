@@ -13,11 +13,6 @@ from app.utils.name2id import id2name, name2id
 @bp.route('/create_icon/<icon_id>', methods=['GET', 'POST'])
 def create_icon(icon_id=None):
     form = IconForm()
-    """
-    这里根据 icon_id 从 db 获取 base64 值和 name
-    :icon_id: md5 for icon
-    :name: character's name
-    """
     if icon_id is not None:
         icon = Icon.query.filter_by(icon_id=icon_id).first()
         if icon:
